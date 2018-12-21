@@ -2,7 +2,7 @@ import java.util.*;
 public class Interface {
 		private int choice_num=0;
 		private Scanner input=new Scanner(System.in);
-		boolean status;
+		boolean status=false;
 		user ob=new user();
 		accounts_database ob2=new accounts_database();
 		public Interface()
@@ -22,7 +22,7 @@ public class Interface {
 					}
 					else if(choice_num==2)
 					{
-					
+						sign_in();
 					}
 					else if(choice_num==3)
 						break;
@@ -33,24 +33,60 @@ public class Interface {
 		public void sign_up()
 		{
 			System.out.println("------------Sign Up Operation---------------");
+			ob2.get_account();
 			ob.set_name();
 			ob.set_userName();
 			ob.set_password();
 			ob.set_gender();
 			ob.set_phoneNum();
-			status=ob2.get_account(ob.get_userName());
+			if(ob2.username.contains(ob.get_userName()))
+				status=true;
+			else 
+				status=false;
 			while(status)
 			{
 				System.out.println("-------Username is taken before,please retry again----");
 				ob.set_userName();
-				status=ob2.get_account(ob.get_userName());
+				if(ob2.username.contains(ob.get_userName()))
+					status=true;
+				else 
+					status=false;
 			}
+			ob2.username.clear();
+			ob2.password.clear();
 			ob2.save_account(ob.get_name(), ob.get_userName(),ob.get_password(), ob.get_gender(),ob.get_phoneNum());
 		
 		}
 		public void sign_in()
 		{
+			ob2.get_account();
+			ob.set_userName();
+			ob.set_password();
+			if(ob2.username.contains(ob.get_userName()))
+			{
+				if(ob.get_password().equals(ob2.password.get( ob2.username.indexOf(ob.get_userName()) )))
+					status=false;
+				else 
+					status=true;
+			}
+			else 
+				status=true;
+			while(status)
+			{
+				System.out.println("-------Username Or Password is invalid,please try again-------");
+				ob.set_userName();
+				ob.set_password();
+				if(ob2.username.contains(ob.get_userName()))
+				{
+					if(ob.get_password().equals(ob2.password.get( ob2.username.indexOf(ob.get_userName()) )))
+							status=false;
+					else 
+						status=true;
+				}
+				else 
+					status=true;
+				}
 			
-		}
-		
+				System.out.println("--------successfully signed in----------------");
+			}
 }	
