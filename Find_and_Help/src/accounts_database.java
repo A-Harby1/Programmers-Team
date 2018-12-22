@@ -1,8 +1,5 @@
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 public class accounts_database {
 	 private Connection connect;
      private PreparedStatement command;
