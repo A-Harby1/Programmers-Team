@@ -55,7 +55,7 @@ public class Interface {
 			ob2.username.clear();
 			ob2.password.clear();
 			ob2.save_account(ob.get_name(), ob.get_userName(),ob.get_password(), ob.get_gender(),ob.get_phoneNum());
-			
+			User_Account ua = new User_Account(ob.get_userName());
 		}
 		public void sign_in()
 		{
@@ -90,6 +90,7 @@ public class Interface {
 				System.out.println("--------successfully signed in----------------");
 				ob2.username.clear();
 				ob2.password.clear();
+				User_Account ua = new User_Account(ob.get_userName());
 			}
 }	
 	
